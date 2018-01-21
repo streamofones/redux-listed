@@ -27,9 +27,15 @@ class App extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    lists: state.lists
+  }
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchLists }, dispatch);
 }
 
 // Connect the actions to the app.
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

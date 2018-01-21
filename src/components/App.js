@@ -5,6 +5,10 @@ import { fetchLists } from '../actions/index';
 import '../index.css';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchLists()
+      .then(res => console.log(res));
+  }
   render() {
     return (
       <div className="App">

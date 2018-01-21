@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addItem } from "../actions";
+import { addItem, updateScore } from "../actions";
 
 import ListItem from "./ListItem";
 
@@ -21,6 +21,7 @@ class List extends Component {
     this.setSortBy = this.setSortBy.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateScore = this.updateScore.bind(this);
   }
   setSortBy(e) {
     this.setState({
@@ -66,6 +67,9 @@ class List extends Component {
     this.setState({
       newItem: "" // Reset the newItem after submission.
     });
+  }
+  updateScore(itemId, currentScore, valueToAdd) {
+    this.props.updateScore(itemId, currentScore, valueToAdd);
   }
   render() {
     return (

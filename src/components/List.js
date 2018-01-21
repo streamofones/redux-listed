@@ -10,10 +10,12 @@ class List extends Component {
   constructor() {
     super();
     this.state = {
-      sortBy: "latest"
+      sortBy: "latest",
+      newItem: ''
     };
     this.sortItems = this.sortItems.bind(this);
     this.setSortBy = this.setSortBy.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   setSortBy(e) {
     this.setState({
@@ -40,6 +42,11 @@ class List extends Component {
 
     return listItems;
   }
+  handleChange(e) {
+    this.setState({
+      [e.target.id]: e.target.value
+    })
+  }
   render() {
     return (
       <div className="list">
@@ -63,7 +70,13 @@ class List extends Component {
               <label htmlFor="newItem" className="visually-hidden">
                 Add To List:
               </label>
-              <input type="text" id="newItem" placeholder="add item to list" />
+              <input
+                onChange={this.handleChange}
+                value={this.state.newItem}
+                type="text"
+                id="newItem"
+                placeholder="add item to list"
+              />
             </form>
           </li>
         </ul>

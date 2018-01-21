@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addItem } from "../actions";
+
 import ListItem from "./ListItem";
 
 // images
@@ -16,6 +20,7 @@ class List extends Component {
     this.sortItems = this.sortItems.bind(this);
     this.setSortBy = this.setSortBy.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   setSortBy(e) {
     this.setState({
@@ -47,6 +52,21 @@ class List extends Component {
       [e.target.id]: e.target.value
     })
   }
+  handleSubmit(e) {
+    e.preventDefault(); // Stop the page from submitting automatically.
+
+    let newItem = this.state.newItem.trim();
+
+    if (newItem !== '') {
+      this.props.addItem(this.props.listInfo._id, newItem);
+    }
+
+
+
+    this.setState({
+      newItem: "" // Reset the newItem after submission.
+    });
+  }
   render() {
     return (
       <div className="list">
@@ -66,7 +86,7 @@ class List extends Component {
         <ul>
           {this.sortItems()}
           <li className="list__item">
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <label htmlFor="newItem" className="visually-hidden">
                 Add To List:
               </label>
@@ -85,5 +105,8 @@ class List extends Component {
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({addItem}, dispatch);
+}
 
-export default List;
+export default connect(null, mapDispatchToProps)(List);

@@ -4,9 +4,19 @@ import axios from "axios";
 export const FETCH_LISTS = "fetch_lists";
 export const ADD_ITEM = 'add_item';
 export const UPDATE_SCORE = 'update_score';
+export const ADD_LIST = 'add_list';
 
 // saves the root url as a variable
 const rootUrl = `http://lists.hackeryou.com`;
+
+export function addList(title) {
+  const request = axios.post(`${rootUrl}/list/`, {title});
+
+  return {
+    type: ADD_LIST,
+    payload: request
+  };
+}
 
 export function updateScore(itemId, currentScore, value) {
   let score = currentScore + value;

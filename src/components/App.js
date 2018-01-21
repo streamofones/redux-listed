@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchLists } from '../actions/index';
 import '../index.css';
 
 class App extends Component {
@@ -20,4 +23,9 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchLists }, dispatch);
+}
+
+// Connect the actions to the app.
+export default connect(null, mapDispatchToProps)(App);

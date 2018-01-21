@@ -42,6 +42,7 @@ class List extends Component {
           key={item._id}
           listId={this.props.listInfo._id}
           itemInfo={item}
+          updateScore={this.updateScore}
         />
       );
     });
@@ -61,8 +62,6 @@ class List extends Component {
     if (newItem !== '') {
       this.props.addItem(this.props.listInfo._id, newItem);
     }
-
-
 
     this.setState({
       newItem: "" // Reset the newItem after submission.
@@ -108,7 +107,7 @@ class List extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({addItem}, dispatch);
+  return bindActionCreators({addItem, updateScore}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(List);

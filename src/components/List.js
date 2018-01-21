@@ -81,11 +81,6 @@ class List extends Component {
             <button id="latest" onClick={this.setSortBy}>
               <img src={latest} alt="" />Latest
             </button>
-          </div>
-        </header>
-        <ul>
-          {this.sortItems()}
-          <li className="list__item">
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="newItem" className="visually-hidden">
                 Add To List:
@@ -98,7 +93,10 @@ class List extends Component {
                 placeholder="add item to list"
               />
             </form>
-          </li>
+          </div>
+        </header>
+        <ul>
+          {this.sortItems()}
         </ul>
       </div>
     );

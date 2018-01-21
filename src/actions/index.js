@@ -9,7 +9,7 @@ const rootUrl = `http://lists.hackeryou.com`;
 export function fetchLists() {
   // sets up an axios request that returns a promise
   const request = axios.get(`${rootUrl}/list`);
-  console.log('request:', request);
+  
   return {
     type: FETCH_LISTS,
     // the promise itself is the payload, which is why we need to use

@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchLists } from '../actions/index';
+import List from './List';
 import '../index.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.renderLists = this.renderLists.bind(this);
+  }
   componentDidMount() {
     this.props.fetchLists()
       .then(res => console.log(res));
+  }
+  renderLists(){
+    const lists = this.props.lists;
+    const listKeys = Object.keys(this.props.lists);
+
+    return listKeys.map((listKey) => {
+      return <List key={listKey} listInfo={lists[listKey]}/>
+    });
   }
   render() {
     return (
@@ -21,7 +34,7 @@ class App extends Component {
             />
           </form>
         </header>
-        <main>Lists go here</main>
+        <main>{this.renderLists()}</main>
       </div>
     );
   }

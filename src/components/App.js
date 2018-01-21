@@ -54,6 +54,7 @@ class App extends Component {
             <input
               onChange={this.handleChange}
               value={this.state.newList}
+              id="newList"
               type="text"
               placeholder="add a list"
             />
@@ -72,7 +73,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchLists }, dispatch);
+  return bindActionCreators({ fetchLists, addList }, dispatch);
 }
 
 // Connect the actions to the app.

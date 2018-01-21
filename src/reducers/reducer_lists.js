@@ -1,9 +1,18 @@
 import _ from 'underscore';
 
-import {FETCH_LISTS, ADD_ITEM, UPDATE_SCORE} from "../actions";
+import {FETCH_LISTS, ADD_ITEM, UPDATE_SCORE, ADD_LIST} from "../actions";
 
 export default function(state = {}, action) {
   switch (action.type) {
+    case ADD_LIST: {
+      const newState = JSON.parse(JSON.stringify(state));
+      
+      const list = action.payload.data.list;
+      const listId = action.payload.data.list._id;
+
+      newState[listId] = list;
+      return newState;
+    }
     case ADD_ITEM: {
       const newItem = action.payload.data.item;
       const listId = action.payload.data.item.belongs_to;
@@ -29,7 +38,7 @@ export default function(state = {}, action) {
       let listItems = newState[listId].items;
 
       // search for the index of the list item we are updated
-      const index = listItems.findIndex(item => item._id == itemId);
+      const index = listItems.findIndex(item => item._id === itemId);
 
       // mutate the NEW COPY of state itself
       listItems[index] = newItem;

@@ -10,7 +10,7 @@ export const ADD_LIST = 'add_list';
 const rootUrl = `http://lists.hackeryou.com`;
 
 export function addList(title) {
-  const request = axios.post(`${rootUrl}/list/`, {title});
+  const request = axios.post(`${rootUrl}/list`, {title});
 
   return {
     type: ADD_LIST,
